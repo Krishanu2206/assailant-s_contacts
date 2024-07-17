@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/usercard.css"/>
+</head>
+<body>
+    <% if(successmessage && successmessage.length) { %>
+            <p>
+                <%= successmessage %>
+            </p>
+    <%}%>
+    <div style="text-align: center;">
+    <h2 style="text-align: center;">All Users</h2>
+    <button>
+    <a type="button" href="http://localhost:8080/create-user" style="text-align: center; text-decoration: none;">Join Today!</a>
+    </button>
+    </div>
+    <div class="container">
+    <% for(let user of users) { %>
+        <div class="card">
+            <h4>User Id : <%= user.id %></h4>
+            <p>
+                Username : <%= user.username %>
+            </p>
+            <p>
+                User Email : <%= user.email %>
+            </p>
+            <form method="GET" action="/user/<%=user.id%>/edit">
+                <button>Edit</button>
+            </form>
+            <form method="POST" id="deleteform" action="/user/<%=user.id%>/delete?_method=delete">
+                <input type="password"
+                name="password" placeholder="Enter Password" required/>
+                <button id="deleteuserbtn">DELETE</button>
+            </form>
+        </div>
+    <% } %>
+    </div>
+</body>
+</html>
